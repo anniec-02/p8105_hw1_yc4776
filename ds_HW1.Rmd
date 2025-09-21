@@ -50,3 +50,34 @@ ggsave("p8105_HW1_plot.png", temp_time_plot, width = 8, height = 5)
 ```
 #Even though the plot is fluctuating, the general pattern is showing an upward trend, with a peak around Jan 14–15.  
 
+## Problem2
+```{r problem_2 ,message = FALSE, warning = FALSE}
+
+
+set.seed(100) #for reproducibility of random samples
+
+#make a data frame for four different kinds of variables
+hw1_p2_df <- tibble (
+  vec_random = rnorm(10),
+  vec_logical = rnorm(10) > 0,
+  vec_char = c("red","blue","yellow","purple","green","black","white","grey","pink","orange"),
+  vec_factor = factor(c("low","low","low","medium","medium","medium","high","high","high","high"))
+)
+
+hw1_p2_df
+
+#calculate for the mean of each variable
+mean_random <- mean(hw1_p2_df %>% pull(vec_random))
+mean_random
+
+mean_logical <- mean(hw1_p2_df %>% pull(vec_logical))
+mean_logical
+
+mean_char <- mean(hw1_p2_df %>% pull(vec_char))
+mean_char
+
+mean_factor <- mean(hw1_p2_df %>% pull(vec_factor))
+mean_factor
+
+```
+#We can see that only the random sample and random vector. The result shows NA for characters and factor.

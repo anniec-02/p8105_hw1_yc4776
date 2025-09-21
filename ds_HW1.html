@@ -1531,6 +1531,48 @@ temp_time_plot</code></pre>
 <p>#Even though the plot is fluctuating, the general pattern is showing
 an upward trend, with a peak around Jan 14–15.</p>
 </div>
+<div id="problem2" class="section level2">
+<h2>Problem2</h2>
+<pre class="r"><code>set.seed(100) #for reproducibility of random samples
+
+#make a data frame for four different kinds of variables
+hw1_p2_df &lt;- tibble (
+  vec_random = rnorm(10),
+  vec_logical = rnorm(10) &gt; 0,
+  vec_char = c(&quot;red&quot;,&quot;blue&quot;,&quot;yellow&quot;,&quot;purple&quot;,&quot;green&quot;,&quot;black&quot;,&quot;white&quot;,&quot;grey&quot;,&quot;pink&quot;,&quot;orange&quot;),
+  vec_factor = factor(c(&quot;low&quot;,&quot;low&quot;,&quot;low&quot;,&quot;medium&quot;,&quot;medium&quot;,&quot;medium&quot;,&quot;high&quot;,&quot;high&quot;,&quot;high&quot;,&quot;high&quot;))
+)
+
+hw1_p2_df</code></pre>
+<pre><code>## # A tibble: 10 × 4
+##    vec_random vec_logical vec_char vec_factor
+##         &lt;dbl&gt; &lt;lgl&gt;       &lt;chr&gt;    &lt;fct&gt;     
+##  1    -0.502  TRUE        red      low       
+##  2     0.132  TRUE        blue     low       
+##  3    -0.0789 FALSE       yellow   low       
+##  4     0.887  TRUE        purple   medium    
+##  5     0.117  TRUE        green    medium    
+##  6     0.319  FALSE       black    medium    
+##  7    -0.582  FALSE       white    high      
+##  8     0.715  TRUE        grey     high      
+##  9    -0.825  FALSE       pink     high      
+## 10    -0.360  TRUE        orange   high</code></pre>
+<pre class="r"><code>#calculate for the mean of each variable
+mean_random &lt;- mean(hw1_p2_df %&gt;% pull(vec_random))
+mean_random</code></pre>
+<pre><code>## [1] -0.01795716</code></pre>
+<pre class="r"><code>mean_logical &lt;- mean(hw1_p2_df %&gt;% pull(vec_logical))
+mean_logical</code></pre>
+<pre><code>## [1] 0.6</code></pre>
+<pre class="r"><code>mean_char &lt;- mean(hw1_p2_df %&gt;% pull(vec_char))
+mean_char</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>mean_factor &lt;- mean(hw1_p2_df %&gt;% pull(vec_factor))
+mean_factor</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>#We can see that only the random sample and random vector. The result
+shows NA for characters and factor.</p>
+</div>
 
 
 
