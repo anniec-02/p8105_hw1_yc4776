@@ -1572,6 +1572,20 @@ mean_factor</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>#We can see that only the random sample and random vector. The result
 shows NA for characters and factor.</p>
+<pre class="r"><code>#test if each variable can be turned into numerical value
+as.numeric(hw1_p2_df %&gt;% pull(vec_random))
+as.numeric(hw1_p2_df %&gt;% pull(vec_logical))
+as.numeric(hw1_p2_df %&gt;% pull(vec_char))
+as.numeric(hw1_p2_df %&gt;% pull(vec_factor))</code></pre>
+<p>#By applying the as.numeric function, we can see that only the sample
+random values and the logical values can be turned into numerical
+values, and at the mean time, the factor showed a warning of NAs
+introduced by coercion, and characters shows NAs for the numerical
+output. This is because the numerical output for logical is also
+considered as binary variables, while factors and characters cannot or
+are meaningless to be turned into numerical values. Since only numerical
+values can have a mean, this result explained what happened when we
+tried to calculate the mean.</p>
 </div>
 
 
