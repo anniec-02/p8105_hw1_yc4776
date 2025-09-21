@@ -2,65 +2,51 @@
 title: "P8105 HW 1"
 author: "Yiying Chen yc4776"
 date: "2025-09-19"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+```{r library}
+library(moderndive) #call the function for problem 1
 
-
+library(tidyverse) #call the function for ggplot in problem1 and data frame in problem2
+```
+## Problem1
 ```{r problem_1_data_import}
-library(moderndive)
+
 data("early_january_weather")
-library(ggplot2)
-
-temp_vs_time_plot <- ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) +
-  geom_point(alpha = 0.7) +
-  labs(
-    title = "JFK Early January Weather",
-    x = "Time (hour)",
-    y = "Temperature (°F)",
-    color = "Humidity"
-  ) +
-  theme_minimal()
-
-temp_vs_time_plot
 
 ```
+
+#Key variables include time_hour, temperature and humidity.  
+#For time_hour, the key value is that <br/>`r paste(capture.output(summary(early_january_weather$time_hour)),collapse = "<br>")`.  
+#For temperature, the key value is that <br/>`r paste(capture.output(summary(early_january_weather$temp)),collapse = "<br>")`.  
+#For humidity, the key value is that <br/>`r paste(capture.output(summary(early_january_weather$humid)),collapse = "<br>")`.  
+#All variables are: `r names(early_january_weather)`.  
 #This dataset has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns.  
-#The mean temperature is `r round(mean(early_january_weather$temp, na.rm = TRUE), 1)` °F.  
-#Key variables include `r names(early_january_weather)`.
-#All variables are: `r paste(names(early_january_weather), collapse = ", ")`.
+#The mean temperature is `r mean(early_january_weather$temp)` °F.  
 
-```{r problem_2}
-set.seed(2025)  # reproducible
+```{r problem_1_plot}
 
-# numeric sample (N(0,1))
-num_sample <- rnorm(10)
+#make ggplot of temperature v.s. time_hour
+temp_time_plot <- ggplot(early_january_weather, aes(x = time_hour, y = temp)) + 
+  geom_point(aes(color = humid), alpha = .5) +
+  labs(
+    title = "Temperature vs Time in Early January",
+    subtitle = "Color = Humidity",
+    x = "Time",
+    y = "Temperature")
 
-# logical: is the numeric sample > 0?
-is_positive <- num_sample > 0
+temp_time_plot
 
-# character: simple letters (or pick any 10 strings)
-char_vec <- letters[1:10]
-
-# factor: three ordered levels recycled to length 10
-ord_factor <- factor(
-  rep(c("low", "med", "high"), length.out = 10),
-  levels = c("low", "med", "high"),
-  ordered = TRUE
-)
-
-toy_df <- tibble::tibble(
-  num_sample,
-  is_positive,
-  char_vec,
-  ord_factor
-)
-
-toy_df
+ggsave("p8105_HW1_plot.png", temp_time_plot, width = 8, height = 5)
 
 ```
+#Even though the plot is fluctuating, the general pattern is showing an upward trend, with a peak around Jan 14–15.  
+
